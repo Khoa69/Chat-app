@@ -13,6 +13,17 @@ const ConversationController = {
         } catch (error) {
             next(error);
         }
+    },
+    findByUserId:async function (req :Request, res:Response , next:NextFunction) {
+        try {
+            const conversations = await Conversation.find({
+                members: {$in : [req.params.userId]},
+            })
+            res.status(200).json(response({ conversations },{},1));
+
+        } catch (error) {
+            next(error);
+        }
     }
 }
 

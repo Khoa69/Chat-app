@@ -35,7 +35,7 @@ const io = new Server(httpServer, {
   },
 });
 
-app.use("/api", require("./routes/index.route.ts"));
+app.use("/api", require("./routes/index.routes.ts"));
 
 app.use(errorConverter);
 app.use(handleError);

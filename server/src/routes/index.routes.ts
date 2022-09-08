@@ -1,11 +1,13 @@
 import router from '../config/router.config'
 import { Iroute } from '../interfaces/route.interface';
-const auth = require('./auth.route');
-const conversation = require('./conversation.route');
+const auth = require('./auth.routes');
+const conversation = require('./conversation.routes');
+const message = require('./message.routes');
 
 const userRoutes :Array<Iroute> = [
     { path: "/auth", route: auth },
-    { path: "/conversation", route: conversation }
+    { path: "/conversation", route: conversation },
+    { path: "/message", route: message },
 ];
 
 userRoutes.forEach((route) => {

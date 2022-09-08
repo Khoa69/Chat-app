@@ -9,8 +9,16 @@ const ConversationSchema = new Schema(
           ref: "user",
         },
       ],
+      type: {
+        type: String,
+        enum : ["GROUP","PERSON"],
+        default: "PERSON",
+      },
+      roomName:{
+        type: String,
+      }
     },
     { timestamps: true }
   );
   
-  module.exports = instance.model("Conversation", ConversationSchema);
+module.exports = instance.model("Conversation", ConversationSchema);
