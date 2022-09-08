@@ -6,9 +6,9 @@ import Home from './pages/Home/Home';
 function App() {
   return (
     <>
-      <SocketsProvider>
+      {/* <SocketsProvider> */}
         <Home/>
-      </SocketsProvider>
+      {/* </SocketsProvider> */}
     </>
   );
 }

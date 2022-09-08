@@ -9,3 +9,11 @@ export interface SocketContextInterface {
   roomId?: string;
   rooms: object;
 }
+
+export interface IauthContext{
+  user: any;
+  loading:boolean,
+  disabled:boolean;
+  isAuth:boolean;
+  error:string;
+}
