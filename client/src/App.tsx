@@ -1,13 +1,13 @@
 import React from 'react';
-import './App.css';
 import SocketsProvider from './context/socket.context';
-import Home from './pages/Home/Home';
+import Home from './pages/Home/Home.page';
+import SLayout from './template/Slayout';
 
 function App() {
   return (
     <>
       {/* <SocketsProvider> */}
-        <Home/>
+        <SLayout/>
       {/* </SocketsProvider> */}
     </>
   );

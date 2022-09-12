@@ -1,3 +1,4 @@
+import React from "react";
 import { Socket } from "socket.io-client";
 
 export interface SocketContextInterface {
@@ -16,4 +17,9 @@ export interface IauthContext{
   disabled:boolean;
   isAuth:boolean;
   error:string;
+}
+
+export interface Iroute {
+  path: string;
+  component: React.FC;
 }
