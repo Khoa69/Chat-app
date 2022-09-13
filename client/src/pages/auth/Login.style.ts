@@ -14,7 +14,7 @@ export const LoginContainer = styled.div`
 `
 
 export const wrapLoginForm = styled.div`
-    width: 390px;
+    width: 500px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -27,4 +27,23 @@ export const wrapLoginForm = styled.div`
         padding-left:15px;
         padding-right:15px;
     }
+`
+
+export const loginButton = styled.button`
+    margin-top:15px;
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    border-radius:50px;
+    border:none;
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    background: -webkit-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
 `

@@ -22,16 +22,20 @@ type SInputInterface = {
 
 export default function SInputComponent(props: SInputInterface) {
   return (
+    <st.container>
     <st.wrapInput>
       <st.label>{props.label}</st.label>
-      {props.icon}
+      <st.wrapInputLine>
+        <st.wrapIcon>
+          {props.icon}
+        </st.wrapIcon>
        <Controller
         defaultValue={props.defaultValue ? props.defaultValue : ''}
         name={props.name}
         control={props.control}
         rules={props.rules}
         render={({ field }) =>
-          <input
+          <st.inputForm
             {...field}
             type={props.type}
             placeholder={props.placeholder}
@@ -43,7 +47,12 @@ export default function SInputComponent(props: SInputInterface) {
               props.onChange && props.onChange(e.target.value);
             }}
           />}
-      />
+        />
+        </st.wrapInputLine>
     </st.wrapInput>
+        {props.error&&<st.errorMessage>
+          {props.error?.message}
+        </st.errorMessage>}
+    </st.container>
   )
 }
