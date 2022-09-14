@@ -4,19 +4,19 @@ import * as st from "./Login.style";
 import UserIcon from "../../assets/userIcon"
 import { useForm } from 'react-hook-form';
 import passwordIcon from "../../assets/passwordIcon.svg";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ErrorMessageEnum } from '../../enums/app.enum';
 import { utils } from '../../utils/utils';
-import { authService } from '../../services/auth.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAPI } from '../../store/auth/authSlice';
-import { IauthContext, IauthLogin } from '../../types';
+import { IauthContext } from '../../types';
 import { toast } from 'react-toastify';
 import { storageService } from '../../_helpers';
 import { RootState } from '../../store/store';
 const Login:React.FC = () =>{
   const { clearErrors, control, handleSubmit, setError, getValues, formState: { errors } } = useForm();
   const dispatch = useDispatch<any>();
+  let navigate = useNavigate();
   const auth= useSelector<RootState, IauthContext>(state =>state.auth);
   const onSubmit = async(formData: any) => {
     const data={
@@ -27,6 +27,7 @@ const Login:React.FC = () =>{
       const result = await dispatch(loginAPI(data));
       await storageService.setAccessToken(result.payload.data.data.accessToken)
       toast.success('🦄 Login Success!');
+      navigate("/messenger")
     } catch (error) {
       toast.error('🦄 Login Fail!');
     }
