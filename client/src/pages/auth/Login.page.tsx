@@ -7,10 +7,29 @@ import passwordIcon from "../../assets/passwordIcon.svg";
 import { Link } from 'react-router-dom';
 import { ErrorMessageEnum } from '../../enums/app.enum';
 import { utils } from '../../utils/utils';
+import { authService } from '../../services/auth.service';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAPI } from '../../store/auth/authSlice';
+import { IauthContext, IauthLogin } from '../../types';
+import { toast } from 'react-toastify';
+import { storageService } from '../../_helpers';
+import { RootState } from '../../store/store';
 const Login:React.FC = () =>{
   const { clearErrors, control, handleSubmit, setError, getValues, formState: { errors } } = useForm();
-  const onSubmit = (formData: any) => {
-    
+  const dispatch = useDispatch<any>();
+  const auth= useSelector<RootState, IauthContext>(state =>state.auth);
+  const onSubmit = async(formData: any) => {
+    const data={
+      email:formData.email, 
+      password: formData.password
+    }
+    try {
+      const result = await dispatch(loginAPI(data));
+      await storageService.setAccessToken(result.payload.data.data.accessToken)
+      toast.success('🦄 Login Success!');
+    } catch (error) {
+      toast.error('🦄 Login Fail!');
+    }
   }
   return (
     <st.LoginContainer>
@@ -43,7 +62,7 @@ const Login:React.FC = () =>{
             'margin': '0px'}} to="home">
           Forgot password?</Link> 
         </div>
-        <st.loginButton  type='submit'>
+        <st.loginButton disabled={auth.disabled} type='submit'>
             Login
         </st.loginButton>
       </form>

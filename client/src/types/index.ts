@@ -23,3 +23,9 @@ export interface Iroute {
   path: string;
   component: React.FC;
 }
+
+
+export type IauthLogin ={
+  email: string;
+  password: string;
+}

@@ -21,6 +21,7 @@ type SInputInterface = {
 } 
 
 export default function SInputComponent(props: SInputInterface) {
+  const [isForcus,setIsForcus] = React.useState(false);
   return (
     <st.container>
     <st.wrapInput>
@@ -40,8 +41,10 @@ export default function SInputComponent(props: SInputInterface) {
             type={props.type}
             placeholder={props.placeholder}
             disabled={props.disabled}
+            onFocus={()=>setIsForcus(true)}
             readOnly={props.readonly}
-            onBlur={() => props.onBlur && props.onBlur()}
+            onBlur={() => {props.onBlur && props.onBlur();setIsForcus(false); 
+            }}
             onChange={(e: any) => {
               field.onChange(e);
               props.onChange && props.onChange(e.target.value);
@@ -50,7 +53,7 @@ export default function SInputComponent(props: SInputInterface) {
         />
         </st.wrapInputLine>
     </st.wrapInput>
-        {props.error&&<st.errorMessage>
+        {!isForcus&&props.error&&<st.errorMessage>
           {props.error?.message}
         </st.errorMessage>}
     </st.container>
