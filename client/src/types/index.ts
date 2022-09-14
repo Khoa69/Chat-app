@@ -29,3 +29,10 @@ export type IauthLogin ={
   email: string;
   password: string;
 }
+
+export type IauthRegister ={
+  name:string;
+  email: string;
+  password: string;
+  re_password:string;
+}
