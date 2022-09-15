@@ -1,10 +1,12 @@
 import React, { Suspense } from "react";
 import { Route, BrowserRouter as Router,Routes } from "react-router-dom";
+import Loading from "../components/loading/Loading.component";
 import { history } from "../helpers/history";
 import { routes } from "./routes";
 import * as st from "./Slayout.style";
 
-const loading = <h3>Loading...</h3>;
+const loading =<Loading type='spin' color="blue" height={100} width={100}/>;
+
 
 const SLayout =(props: any) =>{
   return (

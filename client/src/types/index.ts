@@ -36,3 +36,9 @@ export type IauthRegister ={
   password: string;
   re_password:string;
 }
+
+export type Imessage ={
+  conversationId: string;
+  sender: string;
+  content?:string
+}

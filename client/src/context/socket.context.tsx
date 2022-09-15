@@ -3,8 +3,6 @@ import io from "socket.io-client";
 import config from "../config/default";
 import EVENTS from "../config/events";
 import { SocketContextInterface } from "../types";
-
-
 const socket = io(config.socket_url);
 
 const SocketContext = createContext<SocketContextInterface>({
@@ -38,10 +36,6 @@ function SocketsProvider(props: any) {
     setMessages([]);
   });
 
-  useEffect(()=>{
-    setUsername(localStorage.getItem("username"))
-  },[username])
-
   useEffect(() => {
     socket.on(EVENTS.SERVER.ROOM_MESSAGE, ({ message, username, time }:any) => {
       if (!document.hasFocus()) {
@@ -52,6 +46,7 @@ function SocketsProvider(props: any) {
     });
   }, [socket]);
 
+  
   return (
     <SocketContext.Provider
       value={{

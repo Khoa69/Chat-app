@@ -17,17 +17,20 @@ const MessageController = {
             
             const limit =req.query.limit|| 15;
             const page  =req.query.page||1;
+            console.log(page);
 
             Message
             .find({
                 conversationId: req.params.conversationId
             }) // find tất cả các data
-            .skip(()=>((limit * page) - limit) ) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+            .sort({createdAt:-1})
+            .skip((limit * page) - limit) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
             .limit(limit)
             .exec((err: any, messages :any) => {
-                Message.countDocuments((err:any, count:number) => { // đếm để tính có bao nhiêu trang
+                Message.countDocuments({ conversationId: req.params.conversationId},
+                (err:any, count:number) => { // đếm để tính có bao nhiêu trang
                 if (err) return next(err);
-                res.status(200).json(response({ messages, totalNumber:count},{},1));
+                res.status(200).json(response({ messages: messages.reverse(), totalNumber:count},{},1));
               });
             });
         } catch (error) {

@@ -25,7 +25,7 @@ export const messageText = styled.div`
     border-radius: 20px;
     background-color: ${(props:Props) => props.own ? 'rgb(245, 241, 241)' : '#1877f2' };
     color: ${(props:Props) => props.own ? 'black' : 'white' };
-    max-width: 300px;
+    max-width: 500px;
 `
 
 export const messageBottom = styled.div`

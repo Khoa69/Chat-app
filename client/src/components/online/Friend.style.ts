@@ -4,6 +4,9 @@ export const wrapFriend = styled.div`
     flex:2;
     padding: 10px;
     height: 100%;
+    @media (max-width: 576px) {
+        display: none;
+    }
 `
 
 export const chatOnlineFriend = styled.div`

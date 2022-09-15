@@ -44,6 +44,6 @@ app.use(handleNotFound);
 httpServer.listen(config.port,() => {
   console.log(`http://localhost:${config.port}`);
 
-//   socket({io});
+  socket({io});
 });
 
