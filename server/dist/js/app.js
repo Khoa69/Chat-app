@@ -9,6 +9,7 @@ const socket_io_1 = require("socket.io");
 const logger = require("morgan");
 const cors_1 = __importDefault(require("cors"));
 const default_config_1 = __importDefault(require("./config/default.config"));
+const socket_config_1 = __importDefault(require("./config/socket.config"));
 const { trim_all } = require("request_trimmer");
 const database_config_1 = __importDefault(require("./config/database.config"));
 const helmet_1 = __importDefault(require("helmet"));
@@ -35,5 +36,5 @@ app.use(handleError);
 app.use(handleNotFound);
 httpServer.listen(default_config_1.default.port, () => {
     console.log(`http://localhost:${default_config_1.default.port}`);
-    //   socket({io});
+    (0, socket_config_1.default)({ io });
 });

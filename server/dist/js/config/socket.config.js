@@ -14,47 +14,43 @@ const EVENTS = {
     },
 };
 const rooms = {};
+let users = [];
+const addUser = (userId, socketId) => {
+    !users.some((user) => user.userId === userId) &&
+        users.push({ userId, socketId });
+};
+const removeUser = (socketId) => {
+    users = users.filter((user) => user.socketId !== socketId);
+};
+const getUser = (userId) => {
+    return users.find((user) => user.userId === userId);
+};
 function socket({ io }) {
     console.log(`Sockets enabled`);
-    io.on(EVENTS.connection, (socket) => {
-        console.log(`User connected ${socket.id}`);
-        socket.emit(EVENTS.SERVER.ROOMS, rooms);
-        /*
-         * When a user creates a new room
-         */
-        // socket.on(EVENTS.CLIENT.CREATE_ROOM, ({ roomName }) => {
-        //   console.log({ roomName });
-        //   // create a roomId
-        //   const roomId = nanoid();
-        //   // add a new room to the rooms object
-        //   rooms[roomId] = {
-        //     name: roomName,
-        //   };
-        //   socket.join(roomId);
-        //   // broadcast an event saying there is a new room
-        //   socket.broadcast.emit(EVENTS.SERVER.ROOMS, rooms);
-        //   // emit back to the room creator with all the rooms
-        //   socket.emit(EVENTS.SERVER.ROOMS, rooms);
-        //   // emit event back the room creator saying they have joined a room
-        //   socket.emit(EVENTS.SERVER.JOINED_ROOM, roomId);
-        // });
-        /*
-         * When a user sends a room message
-         */
-        socket.on(EVENTS.CLIENT.SEND_ROOM_MESSAGE, ({ roomId, message, username }) => {
-            const date = new Date();
-            socket.to(roomId).emit(EVENTS.SERVER.ROOM_MESSAGE, {
-                message,
-                username,
-                time: `${date.getHours()}:${date.getMinutes()}`,
+    io.on("connection", (socket) => {
+        //when ceonnect
+        console.log("a user connected.");
+        //take userId and socketId from user
+        socket.on("addUser", (userId) => {
+            if (userId) {
+                addUser(userId, socket.id);
+                io.emit("getUsers", users);
+            }
+        });
+        //send and get message
+        socket.on("sendMessage", ({ senderId, receiverId, content }) => {
+            const user = getUser(receiverId);
+            console.log(user);
+            io.to(user.socketId).emit("getMessage", {
+                senderId,
+                content,
             });
         });
-        /*
-         * When a user joins a room
-         */
-        socket.on(EVENTS.CLIENT.JOIN_ROOM, (roomId) => {
-            socket.join(roomId);
-            socket.emit(EVENTS.SERVER.JOINED_ROOM, roomId);
+        //when disconnect
+        socket.on("disconnect", () => {
+            console.log("a user disconnected!");
+            removeUser(socket.id);
+            io.emit("getUsers", users);
         });
     });
 }
