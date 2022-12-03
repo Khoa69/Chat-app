@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import Conversation from '../conversation/Conversation';
+import searchIcon from "../../assets/searchIcon.svg";
 import * as st from "./Menu.style";
 
 type IpropsMenu={
@@ -12,7 +13,11 @@ const Menu:any=({conversations,currentUser , handleClick}:IpropsMenu)=> {
   return (
     <st.wrapMenu>
         <st.container>
-            <st.searchInput placeholder="Search for friends"/>
+            <st.title>Chat</st.title>
+            <st.search>
+              <st.searchIcon src={searchIcon} height={40} width={20} />
+              <st.searchInput placeholder='Tìm kiếm trên messenger'/>
+            </st.search>
             {
               conversations.map( (c : any)=>
                 {return <Conversation key= {c._id} handleClick={handleClick} conversation={c} currentUser={currentUser}/>}
