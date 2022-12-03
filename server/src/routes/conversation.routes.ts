@@ -5,5 +5,8 @@ router.post("/create",ConversationController.create);
 
 router.get("/:userId",ConversationController.findByUserId);
 
+router.post("/findOrCreate",ConversationController.findOrCreate);
+
+
 
 module.exports = router;

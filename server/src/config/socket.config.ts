@@ -48,7 +48,6 @@ function socket({ io }: { io: Server }) {
   //send and get message
   socket.on("sendMessage", ({ senderId, receiverId, content }) => {
     const user = getUser(receiverId);
-    console.log(user);
     io.to(user.socketId).emit("getMessage", {
       senderId,
       content,

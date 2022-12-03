@@ -17,9 +17,12 @@ import { storageService } from '../../_helpers';
 import { RootState } from '../../store/store';
 const Register:React.FC = () =>{
   const { clearErrors, control, handleSubmit, setError, getValues, formState: { errors } } = useForm();
+  
   const dispatch = useDispatch<any>();
   let navigate = useNavigate();
   const auth= useSelector<RootState, IauthContext>(state =>state.auth);
+  console.log(auth.disabled);
+
   const onSubmit = async(formData: any) => {
     const data={
       email:formData.email, 
