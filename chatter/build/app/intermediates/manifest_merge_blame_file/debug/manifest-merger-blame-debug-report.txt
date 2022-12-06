@@ -94,7 +94,7 @@
 50-->[androidx.core:core:1.8.0] /Users/pscd_mac/.gradle/caches/transforms-3/feadf51cdffd08d0049cb746009a9522/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
 51        android:debuggable="true"
 52        android:icon="@mipmap/ic_launcher"
-53        android:label="chatter"
+53        android:label="BKZalo"
 54        android:usesCleartextTraffic="true" >
 54-->[:cloud_functions] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/cloud_functions/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-44
 55        <activity
