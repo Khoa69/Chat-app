@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "/home/sang/Chat-app/chatter/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
-                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/feadf51cdffd08d0049cb746009a9522/transformed/core-1.8.0/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/home/sang/.gradle/caches/transforms-3/feadf51cdffd08d0049cb746009a9522/transformed/core-1.8.0/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,24 +21,24 @@
                     }
                 },
                 {
-                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/eac5f99dc0513a1e4e90d333dbc4d3e5/transformed/jetified-media2-session-1.2.0/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/home/sang/.gradle/caches/transforms-3/6ba587f18e0cfb42db299785e64a7064/transformed/browser-1.4.0/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "55,159,256,350,471",
-                        "endColumns": "103,96,93,120,128",
-                        "endOffsets": "154,251,345,466,595"
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,250,359",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,245,354,453"
                     },
                     "to": {
-                        "startLines": "3,16,17,18,19",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "153,1209,1306,1400,1521",
-                        "endColumns": "103,96,93,120,128",
-                        "endOffsets": "252,1301,1395,1516,1645"
+                        "startLines": "2,13,14,15",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,904,1001,1110",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,996,1105,1204"
                     }
                 },
                 {
-                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/a277c38eb06c9e3334867efe9822273c/transformed/jetified-exoplayer-core-2.18.1/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/home/sang/.gradle/caches/transforms-3/a277c38eb06c9e3334867efe9822273c/transformed/jetified-exoplayer-core-2.18.1/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/6ba587f18e0cfb42db299785e64a7064/transformed/browser-1.4.0/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/home/sang/.gradle/caches/transforms-3/eac5f99dc0513a1e4e90d333dbc4d3e5/transformed/jetified-media2-session-1.2.0/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,153,250,359",
-                        "endColumns": "97,96,108,98",
-                        "endOffsets": "148,245,354,453"
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,159,256,350,471",
+                        "endColumns": "103,96,93,120,128",
+                        "endOffsets": "154,251,345,466,595"
                     },
                     "to": {
-                        "startLines": "2,13,14,15",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,904,1001,1110",
-                        "endColumns": "97,96,108,98",
-                        "endOffsets": "148,996,1105,1204"
+                        "startLines": "3,16,17,18,19",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "153,1209,1306,1400,1521",
+                        "endColumns": "103,96,93,120,128",
+                        "endOffsets": "252,1301,1395,1516,1645"
                     }
                 }
             ]
