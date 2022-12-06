@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:chatter/helpers.dart';
 import 'package:collection/collection.dart' show IterableExtension;
@@ -58,54 +59,64 @@ class _ChatScreenState extends State<ChatScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 54,
-          leading: Align(
-            alignment: Alignment.centerRight,
-            child: IconBackground(
-              icon: CupertinoIcons.back,
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-            ),
+          backgroundColor: AppColors.lightBlue,
+          leadingWidth: 20,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              CupertinoIcons.arrow_left,
+
+            )
           ),
           title: const _AppBarTitle(),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Center(
-                child: IconBorder(
-                  icon: CupertinoIcons.video_camera_solid,
-                  onTap: () {},
+                child: IconButton(
+                  icon: const Icon(
+                    CupertinoIcons.phone_solid,
+                    size: 25,
+                  ),
+                  onPressed: () {},
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: Center(
-                child: IconBorder(
-                  icon: CupertinoIcons.phone_solid,
-                  onTap: () {},
+                child: IconButton(
+                  icon: const Icon(
+                    CupertinoIcons.video_camera_solid,
+                    size: 30,
+                  ),
+                  onPressed: () {},
                 ),
               ),
             ),
           ],
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: MessageListCore(
-                loadingBuilder: (context) {
-                  return const Center(child: CircularProgressIndicator());
-                },
-                emptyBuilder: (context) => const SizedBox.shrink(),
-                errorBuilder: (context, error) =>
-                    DisplayErrorMessage(error: error),
-                messageListBuilder: (context, messages) =>
-                    _MessageList(messages: messages),
+        body: Container(
+          color: AppColors.primary,
+          child: Column(
+            children: [
+              Expanded(
+                child: MessageListCore(
+                  loadingBuilder: (context) {
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                  emptyBuilder: (context) => const SizedBox.shrink(),
+                  errorBuilder: (context, error) =>
+                      DisplayErrorMessage(error: error),
+                  messageListBuilder: (context, messages) =>
+                      _MessageList(messages: messages),
+                ),
               ),
-            ),
-            const _ActionBar(),
-          ],
+              const _ActionBar(),
+            ],
+          ),
         ),
       ),
     );
@@ -188,9 +199,9 @@ class _MessageTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
-                borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                color: AppColors.white,
+                borderRadius:  BorderRadius.only(
                   topLeft: Radius.circular(_borderRadius),
                   topRight: Radius.circular(_borderRadius),
                   bottomRight: Radius.circular(_borderRadius),
@@ -199,7 +210,13 @@ class _MessageTile extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
-                child: Text(message.text ?? ''),
+                child: Text(message.text ?? '',
+                  style: const TextStyle(
+                    color: AppColors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
             Padding(
@@ -207,8 +224,8 @@ class _MessageTile extends StatelessWidget {
               child: Text(
                 Jiffy(message.createdAt.toLocal()).jm,
                 style: const TextStyle(
-                  color: AppColors.textFaded,
-                  fontSize: 10,
+                  color: AppColors.black,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -242,7 +259,7 @@ class _MessageOwnTile extends StatelessWidget {
           children: [
             Container(
               decoration: const BoxDecoration(
-                color: AppColors.secondary,
+                color: AppColors.lightBlue,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(_borderRadius),
                   bottomRight: Radius.circular(_borderRadius),
@@ -253,9 +270,11 @@ class _MessageOwnTile extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
                 child: Text(message.text ?? '',
-                    style: const TextStyle(
-                      color: AppColors.textLigth,
-                    )),
+                  style: const TextStyle(
+                    color: AppColors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400
+                  )),
               ),
             ),
             Padding(
@@ -263,8 +282,8 @@ class _MessageOwnTile extends StatelessWidget {
               child: Text(
                 Jiffy(message.createdAt.toLocal()).jm,
                 style: const TextStyle(
-                  color: AppColors.textFaded,
-                  fontSize: 10,
+                  color: AppColors.black,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -297,10 +316,10 @@ class __DateLableState extends State<_DateLable> {
     final now = DateTime.now();
 
     if (Jiffy(createdAt).isSame(now, Units.DAY)) {
-      dayInfo = 'TODAY';
+      dayInfo = 'Hôm nay';
     } else if (Jiffy(createdAt)
         .isSame(now.subtract(const Duration(days: 1)), Units.DAY)) {
-      dayInfo = 'YESTERDAY';
+      dayInfo = 'Hôm qua';
     } else if (Jiffy(createdAt).isAfter(
       now.subtract(const Duration(days: 7)),
       Units.DAY,
@@ -325,7 +344,7 @@ class __DateLableState extends State<_DateLable> {
         padding: const EdgeInsets.symmetric(vertical: 32.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: const Color(0xFF575757),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(
@@ -333,9 +352,9 @@ class __DateLableState extends State<_DateLable> {
             child: Text(
               dayInfo,
               style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textFaded,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: AppColors.white,
               ),
             ),
           ),
@@ -353,6 +372,7 @@ class _AppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final channel = StreamChannel.of(context).channel;
+    log(Helpers.getChannelImage(channel, context.currentUser!).toString());
     return Row(
       children: [
         Avatar.small(
@@ -436,7 +456,7 @@ class _AppBarTitle extends StatelessWidget {
       if (otherMember != null) {
         if (otherMember.user?.online == true) {
           alternativeWidget = const Text(
-            'Online',
+            'Hoạt động',
             style: TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.bold,
@@ -445,11 +465,11 @@ class _AppBarTitle extends StatelessWidget {
           );
         } else {
           alternativeWidget = Text(
-            'Last online: '
+            'Truy cập '
             '${Jiffy(otherMember.user?.lastActive).fromNow()}',
             style: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
               color: Colors.red,
             ),
           );
@@ -611,54 +631,66 @@ class __ActionBarState extends State<_ActionBar> {
     return SafeArea(
       bottom: true,
       top: false,
-      child: Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                right: BorderSide(
-                  width: 2,
-                  color: Theme.of(context).dividerColor,
+      child: Container(
+        color: AppColors.white,
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  right: BorderSide(
+                    width: 2,
+                    color: Theme.of(context).dividerColor,
+                  ),
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Icon(
+                  CupertinoIcons.camera_fill,
+                  color: AppColors.black,
                 ),
               ),
             ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Icon(
-                CupertinoIcons.camera_fill,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: TextField(
-                controller: controller.textEditingController,
-                onChanged: (val) {
-                  controller.text = val;
-                },
-                style: const TextStyle(fontSize: 14),
-                decoration: const InputDecoration(
-                  hintText: 'Type something...',
-                  border: InputBorder.none,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: TextField(
+                  controller: controller.textEditingController,
+                  onChanged: (val) {
+                    controller.text = val;
+                  },
+                  style: const TextStyle(
+                    fontSize: 17,
+                    color: AppColors.primaryText
+                  ),
+                  decoration: const InputDecoration(
+                    hintText: 'Tin nhắn',
+                    hintStyle: TextStyle(
+                      fontSize: 17,
+                      color: AppColors.primaryText
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  onSubmitted: (_) => _sendMessage(),
                 ),
-                onSubmitted: (_) => _sendMessage(),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 12,
-              right: 24.0,
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 12,
+                right: 10.0,
+              ),
+              child: GlowingActionButton(
+                color: AppColors.lightBlue,
+                icon: Icons.send_rounded,
+                onPressed: _sendMessage,
+              ),
             ),
-            child: GlowingActionButton(
-              color: AppColors.accent,
-              icon: Icons.send_rounded,
-              onPressed: _sendMessage,
-            ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 }

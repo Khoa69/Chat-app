@@ -3,17 +3,30 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppColors {
+  static const white = Color(0xFFFFFFFF);
+  static const black = Color(0xFF000000);
+  static const stoneText = Color(0xFFF8F8F8);
   static const secondary = Color(0xFF3B76F6);
   static const accent = Color(0xFFD6755B);
   static const textDark = Color(0xFF53585A);
   static const textLigth = Color(0xFFF5F5F5);
+  static const primaryText = Color(0xFF5F5F5F);
+  static const primary = Color(0xFFdfe1e7);
   static const textFaded = Color(0xFF9899A5);
   static const iconLight = Color(0xFFB1B4C0);
   static const iconDark = Color(0xFFB1B3C1);
   static const textHighlight = secondary;
   static const cardLight = Color(0xFFF9FAFE);
   static const cardDark = Color(0xFF303334);
+  static const lightBlue = Color(0xFF2489CF);
 }
+class GradientColors {
+  static const buttonDisabledGradient = LinearGradient(colors: [
+    Color(0xFFE3E3E3),
+    Color(0xFFA3A3A3),
+  ], begin: Alignment.topRight, end: Alignment.bottomRight);
+}
+
 
 abstract class _LightColors {
   static const background = Colors.white;
