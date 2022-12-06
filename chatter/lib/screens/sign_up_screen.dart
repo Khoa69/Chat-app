@@ -84,7 +84,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ? _profilePictureController.text
               : "https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg",
         );
-     
         await client.connectUser(
           streamUser,
           results.data,
@@ -152,14 +151,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 60,
-          title: const Text('Đăng ký',
+          title: const Text(
+            'Đăng ký',
             style: TextStyle(
               fontSize: 25,
             ),
           ),
           centerTitle: true,
           backgroundColor: AppColors.lightBlue,
-          
           elevation: 0,
         ),
         body: (_loading)
@@ -167,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             : SingleChildScrollView(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  height: MediaQuery.of(context).size.height-60,
+                  height: MediaQuery.of(context).size.height - 60,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     image: Image.asset(
@@ -182,7 +181,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.black, width: 1),
+                            border:
+                                Border.all(color: AppColors.black, width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(30)),
                             color: AppColors.white,
@@ -222,7 +222,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.black, width: 1),
+                            border:
+                                Border.all(color: AppColors.black, width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(30)),
                             color: AppColors.white,
@@ -232,21 +233,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             controller: _profilePictureController,
                             decoration: InputDecoration(
-                              prefixIcon: Container(
-                                width: 40,
-                                alignment: Alignment.center,
-                                child: const Icon(
-                                  CupertinoIcons.link,
-                                  color: AppColors.black,
+                                prefixIcon: Container(
+                                  width: 40,
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    CupertinoIcons.link,
+                                    color: AppColors.black,
+                                  ),
                                 ),
-                              ),
-                              border: InputBorder.none,
-                              hintText: 'Nhập URL ảnh',
-                              hintStyle: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.primaryText,
-                              )),
+                                border: InputBorder.none,
+                                hintText: 'Nhập URL ảnh',
+                                hintStyle: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.primaryText,
+                                )),
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w400,
@@ -257,7 +258,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.black, width: 1),
+                            border:
+                                Border.all(color: AppColors.black, width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(30)),
                             color: AppColors.white,
@@ -268,21 +270,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _emailController,
                             validator: _emailInputValidator,
                             decoration: InputDecoration(
-                              prefixIcon: Container(
-                                width: 40,
-                                alignment: Alignment.center,
-                                child: const Icon(
-                                  CupertinoIcons.mail,
-                                  color: AppColors.black,
+                                prefixIcon: Container(
+                                  width: 40,
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    CupertinoIcons.mail,
+                                    color: AppColors.black,
+                                  ),
                                 ),
-                              ),
-                              border: InputBorder.none,
-                              hintText: 'Nhập Email',
-                              hintStyle: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.primaryText,
-                              )),
+                                border: InputBorder.none,
+                                hintText: 'Nhập Email',
+                                hintStyle: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.primaryText,
+                                )),
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w400,
@@ -294,7 +296,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.black, width: 1),
+                            border:
+                                Border.all(color: AppColors.black, width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(30)),
                             color: AppColors.white,
@@ -305,21 +308,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _passwordController,
                             validator: _passwordInputValidator,
                             decoration: InputDecoration(
-                              prefixIcon: Container(
-                                width: 40,
-                                alignment: Alignment.center,
-                                child: const Icon(
-                                  CupertinoIcons.lock,
-                                  color: AppColors.black,
+                                prefixIcon: Container(
+                                  width: 40,
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    CupertinoIcons.lock,
+                                    color: AppColors.black,
+                                  ),
                                 ),
-                              ),
-                              border: InputBorder.none,
-                              hintText: 'Nhập password',
-                              hintStyle: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.primaryText,
-                              )),
+                                border: InputBorder.none,
+                                hintText: 'Nhập password',
+                                hintStyle: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.primaryText,
+                                )),
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w400,
@@ -339,7 +342,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             alignment: Alignment.center,
                             margin: const EdgeInsets.only(bottom: 30, top: 20),
                             decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
                               color: Color(0xFF3C61EA),
                             ),
                             child: const Text(
