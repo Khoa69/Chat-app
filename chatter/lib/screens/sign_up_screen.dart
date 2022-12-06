@@ -58,6 +58,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           creds.user!.updateDisplayName(_nameController.text),
           if (_profilePictureController.text.isNotEmpty)
             creds.user!.updatePhotoURL(_profilePictureController.text)
+          else
+            creds.user!.updatePhotoURL(
+                "https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg")
         ];
 
         await Future.wait(futures);
@@ -73,7 +76,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         final streamUser = User(
           id: creds.user!.uid,
           name: _nameController.text,
-          image: _profilePictureController.text,
+          image: _profilePictureController.text.isNotEmpty
+              ? _profilePictureController.text
+              : "https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg",
         );
         await client.connectUser(
           streamUser,
