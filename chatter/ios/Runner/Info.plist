@@ -47,5 +47,25 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Cho phép BKZalo truy cập vào camera.</string>
+	<key>NSContactsAlwaysUsageDescription</key>
+	<string>Cho phép BKZalo truy cập thông tin danh bạ</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Cho phép BKZalo truy cập thông tin danh bạ</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Cho phép BKZalo truy cập vào vị trí của bạn.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Cho phép BKZalo truy cập vào vị trí của bạn.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Cho phép BKZalo truy cập vào vị trí của bạn.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app does not require access to the microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Cho phép BKZalo truy cập vào thư viện ảnh</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Cho phép BKZalo truy cập vào audio</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Cho phép BKZalo truy cập vào micro</string>
 </dict>
 </plist>

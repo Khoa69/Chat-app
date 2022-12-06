@@ -1,15 +1,23 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:chatter/helpers.dart';
+import 'package:chatter/widgets/audio_loading_message.dart';
+import 'package:chatter/widgets/audio_player_message.dart';
+import 'package:chatter/widgets/record_button.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:chatter/theme.dart';
 import 'package:chatter/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
 import 'package:chatter/app.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ChatScreen extends StatefulWidget {
   static Route routeWithChannel(Channel channel) => MaterialPageRoute(
@@ -29,10 +37,50 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   late StreamSubscription<int> unreadCountSubscription;
+  late final messageInputController = StreamMessageInputController();
+  final focusNode = FocusNode();
+  bool _isListening = false;
+  SpeechToText _speechToText = SpeechToText();
+  String _textSpeech = "";
+  Future<void> onListen() async {
+    if (!_isListening) {
+      bool available = await _speechToText.initialize(
+        onStatus: (val) => print(_speechToText.isListening),
+        onError: (val) => setState(() {
+          _isListening = false;
+          _speechToText.stop();
+        }),
+      );
+      var systemLocale = await _speechToText.systemLocale();
+      var selectedLocale = systemLocale?.localeId ?? "";
+      print(selectedLocale);
+      print("Test");
+      if (available) {
+        setState(() {
+          _isListening = true;
+        });
+        _speechToText.listen(
+          onResult: (val) => setState(() {
+            _textSpeech = val.recognizedWords;
+          }),
+          localeId: selectedLocale,
+        );
+      }
+    } else {
+      setState(() {
+        _isListening = false;
+        _speechToText.stop();
+      });
+      var txt = TextEditingController(text: _textSpeech);
+      txt.selection = TextSelection.collapsed(offset: txt.text.length);
+      messageInputController.textEditingValue = txt.value;
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _speechToText = SpeechToText();
 
     unreadCountSubscription = StreamChannel.of(context)
         .channel
@@ -53,6 +101,35 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
+  void reply(Message message) {
+    messageInputController.quotedMessage = message;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      focusNode.requestFocus();
+    });
+  }
+
+  void _recordingFinishedCallback(String path) {
+    final uri = Uri.parse(path);
+    File file = File(uri.path);
+    file.length().then(
+      (fileSize) {
+        StreamChannel.of(context).channel.sendMessage(
+              Message(
+                attachments: [
+                  Attachment(
+                    type: 'voicenote',
+                    file: AttachmentFile(
+                      size: fileSize,
+                      path: uri.path,
+                    ),
+                  )
+                ],
+              ),
+            );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -62,14 +139,12 @@ class _ChatScreenState extends State<ChatScreen> {
           backgroundColor: AppColors.lightBlue,
           leadingWidth: 20,
           leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(
-              CupertinoIcons.arrow_left,
-
-            )
-          ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                CupertinoIcons.arrow_left,
+              )),
           title: const _AppBarTitle(),
           actions: [
             Padding(
@@ -101,23 +176,111 @@ class _ChatScreenState extends State<ChatScreen> {
         body: Container(
           color: AppColors.primary,
           child: Column(
+            // ignore: prefer_const_literals_to_create_immutables
             children: [
               Expanded(
-                child: MessageListCore(
-                  loadingBuilder: (context) {
-                    return const Center(child: CircularProgressIndicator());
+                child: StreamMessageListView(
+                  onMessageSwiped:
+                      (CurrentPlatform.isAndroid || CurrentPlatform.isIos)
+                          ? reply
+                          : null,
+                  threadBuilder: (context, parent) {
+                    return ThreadPage(
+                      parent: parent!,
+                    );
                   },
-                  emptyBuilder: (context) => const SizedBox.shrink(),
-                  errorBuilder: (context, error) =>
-                      DisplayErrorMessage(error: error),
-                  messageListBuilder: (context, messages) =>
-                      _MessageList(messages: messages),
+                  messageBuilder: (context, details, messages, defaultWidget) {
+                    return defaultWidget.copyWith(
+                      onReplyTap: reply,
+                      customAttachmentBuilders: {
+                        'voicenote': (context, defaultMessage, attachments) {
+                          final url = attachments.first.assetUrl;
+                          late final Widget widget;
+                          if (url == null) {
+                            widget = const AudioLoadingMessage();
+                          } else {
+                            widget = AudioPlayerMessage(
+                              source: AudioSource.uri(Uri.parse(url)),
+                              id: defaultMessage.id,
+                            );
+                          }
+                          return SizedBox(
+                            width: 250,
+                            height: 50,
+                            child: widget,
+                          );
+                        }
+                      },
+                    );
+                  },
                 ),
               ),
-              const _ActionBar(),
+              StreamMessageInput(
+                actions: [
+                  RecordButton(
+                    recordingFinishedCallback: _recordingFinishedCallback,
+                  ),
+                  InkWell(
+                    child: Icon(
+                      _isListening ? Icons.mic : Icons.mic_none,
+                    ),
+                    onTap: () {
+                      onListen();
+                    },
+                  ),
+                ],
+                sendButtonLocation: SendButtonLocation.inside,
+                focusNode: focusNode,
+                messageInputController: messageInputController,
+                autoCorrect: false,
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ThreadPage extends StatelessWidget {
+  const ThreadPage({
+    Key? key,
+    required this.parent,
+  });
+
+  final Message parent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: StreamThreadHeader(
+        parent: parent,
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: StreamMessageListView(
+              parentMessage: parent,
+            ),
+          ),
+          StreamMessageInput(
+            actions: [
+              InkWell(
+                child: const Icon(
+                  Icons.mic,
+                  size: 20.0,
+                  color: Colors.grey,
+                ),
+                onTap: () {
+                  // Do something here
+                },
+              ),
+            ],
+            messageInputController: StreamMessageInputController(
+              message: Message(parentId: parent.id),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -201,7 +364,7 @@ class _MessageTile extends StatelessWidget {
             Container(
               decoration: const BoxDecoration(
                 color: AppColors.white,
-                borderRadius:  BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(_borderRadius),
                   topRight: Radius.circular(_borderRadius),
                   bottomRight: Radius.circular(_borderRadius),
@@ -210,7 +373,8 @@ class _MessageTile extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
-                child: Text(message.text ?? '',
+                child: Text(
+                  message.text ?? '',
                   style: const TextStyle(
                     color: AppColors.black,
                     fontSize: 17,
@@ -270,11 +434,10 @@ class _MessageOwnTile extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
                 child: Text(message.text ?? '',
-                  style: const TextStyle(
-                    color: AppColors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400
-                  )),
+                    style: const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400)),
               ),
             ),
             Padding(
@@ -629,68 +792,63 @@ class __ActionBarState extends State<_ActionBar> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      bottom: true,
-      top: false,
-      child: Container(
-        color: AppColors.white,
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  right: BorderSide(
-                    width: 2,
-                    color: Theme.of(context).dividerColor,
-                  ),
-                ),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Icon(
-                  CupertinoIcons.camera_fill,
-                  color: AppColors.black,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: TextField(
-                  controller: controller.textEditingController,
-                  onChanged: (val) {
-                    controller.text = val;
-                  },
-                  style: const TextStyle(
-                    fontSize: 17,
-                    color: AppColors.primaryText
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'Tin nhắn',
-                    hintStyle: TextStyle(
-                      fontSize: 17,
-                      color: AppColors.primaryText
+        bottom: true,
+        top: false,
+        child: Container(
+          color: AppColors.white,
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      width: 2,
+                      color: Theme.of(context).dividerColor,
                     ),
-                    border: InputBorder.none,
                   ),
-                  onSubmitted: (_) => _sendMessage(),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Icon(
+                    CupertinoIcons.camera_fill,
+                    color: AppColors.black,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 12,
-                right: 10.0,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: TextField(
+                    controller: controller.textFieldController,
+                    onChanged: (val) {
+                      controller.text = val;
+                    },
+                    style: const TextStyle(
+                        fontSize: 17, color: AppColors.primaryText),
+                    decoration: const InputDecoration(
+                      hintText: 'Tin nhắn',
+                      hintStyle:
+                          TextStyle(fontSize: 17, color: AppColors.primaryText),
+                      border: InputBorder.none,
+                    ),
+                    onSubmitted: (_) => _sendMessage(),
+                  ),
+                ),
               ),
-              child: GlowingActionButton(
-                color: AppColors.lightBlue,
-                icon: Icons.send_rounded,
-                onPressed: _sendMessage,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 12,
+                  right: 10.0,
+                ),
+                child: GlowingActionButton(
+                  color: AppColors.lightBlue,
+                  icon: Icons.send_rounded,
+                  onPressed: _sendMessage,
+                ),
               ),
-            ),
-          ],
-        ),
-      )
-    );
+            ],
+          ),
+        ));
   }
 }

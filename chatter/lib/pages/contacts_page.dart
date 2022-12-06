@@ -1,7 +1,7 @@
 import 'package:chatter/screens/chat_screen.dart';
 import 'package:chatter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({Key? key}) : super(key: key);

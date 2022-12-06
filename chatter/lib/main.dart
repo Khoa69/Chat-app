@@ -4,7 +4,7 @@ import 'package:chatter/screens/screens.dart';
 import 'package:chatter/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       title: 'Chatter',
       builder: (context, child) {
-        return StreamChatCore(
+        return StreamChat(
           client: client,
           child: child!,
         );

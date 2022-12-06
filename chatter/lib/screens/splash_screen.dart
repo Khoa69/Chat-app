@@ -4,7 +4,7 @@ import 'package:chatter/screens/screens.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:flutter/material.dart';
-import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
   static Route get route => MaterialPageRoute(

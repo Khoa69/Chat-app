@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 abstract class Helpers {
   static final random = Random();

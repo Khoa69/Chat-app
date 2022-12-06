@@ -3,7 +3,7 @@ import 'package:chatter/screens/screens.dart';
 import 'package:chatter/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:flutter/material.dart';
-import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ProfileScreen extends StatelessWidget {
   static Route get route => MaterialPageRoute(
