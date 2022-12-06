@@ -53,8 +53,6 @@ class _ChatScreenState extends State<ChatScreen> {
       );
       var systemLocale = await _speechToText.systemLocale();
       var selectedLocale = systemLocale?.localeId ?? "";
-      print(selectedLocale);
-      print("Test");
       if (available) {
         setState(() {
           _isListening = true;

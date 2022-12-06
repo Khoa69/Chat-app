@@ -233,7 +233,7 @@ class _MessageTile extends StatelessWidget {
             startOfDay
                 .subtract(const Duration(days: 1))
                 .millisecondsSinceEpoch) {
-          stringDate = 'YESTERDAY';
+          stringDate = 'Hôm qua';
         } else if (startOfDay.difference(lastMessageAt).inDays < 7) {
           stringDate = Jiffy(lastMessageAt.toLocal()).EEEE;
         } else {

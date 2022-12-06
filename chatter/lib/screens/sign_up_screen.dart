@@ -1,6 +1,9 @@
+import 'package:chatter/theme.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 import '../app.dart';
@@ -73,6 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         // Connect user to Stream and set user data
         if (!mounted) return;
         final client = StreamChatCore.of(context).client;
+
         final streamUser = User(
           id: creds.user!.uid,
           name: _nameController.text,
@@ -80,6 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ? _profilePictureController.text
               : "https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg",
         );
+     
         await client.connectUser(
           streamUser,
           results.data,
@@ -143,107 +148,215 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('CHATTER'),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: (_loading)
-          ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 24, bottom: 24),
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                              fontSize: 26, fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: _nameController,
-                          validator: _nameInputValidator,
-                          decoration: const InputDecoration(hintText: 'name'),
-                          keyboardType: TextInputType.name,
-                          autofillHints: const [
-                            AutofillHints.name,
-                            AutofillHints.username
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: _profilePictureController,
-                          decoration:
-                              const InputDecoration(hintText: 'picture URL'),
-                          keyboardType: TextInputType.url,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: _emailController,
-                          validator: _emailInputValidator,
-                          decoration: const InputDecoration(hintText: 'email'),
-                          keyboardType: TextInputType.emailAddress,
-                          autofillHints: const [AutofillHints.email],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: _passwordController,
-                          validator: _passwordInputValidator,
-                          decoration: const InputDecoration(
-                            hintText: 'password',
+    return KeyboardDismisser(
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 60,
+          title: const Text('Đăng ký',
+            style: TextStyle(
+              fontSize: 25,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: AppColors.lightBlue,
+          
+          elevation: 0,
+        ),
+        body: (_loading)
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  height: MediaQuery.of(context).size.height-60,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: Image.asset(
+                      "assets/images/backgroundSignin.jpeg",
+                    ).image,
+                    fit: BoxFit.cover,
+                  )),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.black, width: 1),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                            color: AppColors.white,
                           ),
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          keyboardType: TextInputType.visiblePassword,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: _signUp,
-                          child: const Text('Sign up'),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Divider(),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Already have an account?',
-                              style: Theme.of(context).textTheme.subtitle2),
-                          const SizedBox(width: 8),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Sign in'),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+                          child: TextFormField(
+                            controller: _nameController,
+                            validator: _nameInputValidator,
+                            decoration: InputDecoration(
+                                prefixIcon: Container(
+                                  width: 40,
+                                  alignment: Alignment.center,
+                                  child: const Icon(
+                                    CupertinoIcons.person_alt_circle,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                                border: InputBorder.none,
+                                hintText: 'Nhập tên',
+                                hintStyle: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.primaryText,
+                                )),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.black,
+                            ),
+                            keyboardType: TextInputType.name,
+                            autofillHints: const [
+                              AutofillHints.name,
+                              AutofillHints.username
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.black, width: 1),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                            color: AppColors.white,
+                          ),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+                          child: TextFormField(
+                            controller: _profilePictureController,
+                            decoration: InputDecoration(
+                              prefixIcon: Container(
+                                width: 40,
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  CupertinoIcons.link,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Nhập URL ảnh',
+                              hintStyle: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryText,
+                              )),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.black,
+                            ),
+                            keyboardType: TextInputType.url,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.black, width: 1),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                            color: AppColors.white,
+                          ),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+                          child: TextFormField(
+                            controller: _emailController,
+                            validator: _emailInputValidator,
+                            decoration: InputDecoration(
+                              prefixIcon: Container(
+                                width: 40,
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  CupertinoIcons.mail,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Nhập Email',
+                              hintStyle: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryText,
+                              )),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.black,
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            autofillHints: const [AutofillHints.email],
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.black, width: 1),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                            color: AppColors.white,
+                          ),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+                          child: TextFormField(
+                            controller: _passwordController,
+                            validator: _passwordInputValidator,
+                            decoration: InputDecoration(
+                              prefixIcon: Container(
+                                width: 40,
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  CupertinoIcons.lock,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Nhập password',
+                              hintStyle: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryText,
+                              )),
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.black,
+                            ),
+                            obscureText: true,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            keyboardType: TextInputType.visiblePassword,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: _signUp,
+                          child: Container(
+                            width: 200,
+                            height: 40,
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(bottom: 30, top: 20),
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(30)),
+                              color: Color(0xFF3C61EA),
+                            ),
+                            child: const Text(
+                              'Đăng ký',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  color: AppColors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }

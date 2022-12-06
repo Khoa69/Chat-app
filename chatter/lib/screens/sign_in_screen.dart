@@ -4,6 +4,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 import '../app.dart';
@@ -123,155 +124,161 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      body: _loading
-          ? const Center(child: CircularProgressIndicator())
-          : Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: Image.network(
-                  "https://www.udn.vn/Portals/0/242481655_2344964658971083_7905287510387238215_n_1.jpeg",
-                ).image,
-                fit: BoxFit.cover,
-              )),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.network(
-                      "http://dut.udn.vn/Files/admin/images/Tin_tuc/Khac/2020/LogoDUT/image002.jpg",
-                      width: 150,
-                      height: 150,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.black, width: 1),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30)),
-                        color: AppColors.white,
+
+    return KeyboardDismisser(
+      child:Scaffold(
+        backgroundColor: AppColors.white,
+        body: _loading
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: Image.asset(
+                    "assets/images/backgroundSignin.jpeg",
+                  ).image,
+                  fit: BoxFit.cover,
+                )),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/icons/app_icon.jpeg",
+                        width: 150,
+                        height: 150,
                       ),
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
-                      child: TextFormField(
-                        controller: _emailController,
-                        validator: _emailInputValidator,
-                        decoration: InputDecoration(
-                            prefixIcon: Container(
-                              width: 40,
-                              alignment: Alignment.center,
-                              child: const Icon(
-                                CupertinoIcons.person_alt_circle,
-                                color: AppColors.black,
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.black, width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          color: AppColors.white,
+                        ),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+                        child: TextFormField(
+                          controller: _emailController,
+                          validator: _emailInputValidator,
+                          decoration: InputDecoration(
+                              prefixIcon: Container(
+                                width: 40,
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  CupertinoIcons.person_alt_circle,
+                                  color: AppColors.black,
+                                ),
                               ),
-                            ),
-                            border: InputBorder.none,
-                            hintText: 'email',
-                            hintStyle: const TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.primaryText,
-                            )),
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.black,
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        autofillHints: const [AutofillHints.email],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.black, width: 1),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30)),
-                        color: AppColors.white,
-                      ),
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
-                      child: TextFormField(
-                        controller: _passwordController,
-                        validator: _passwordInputValidator,
-                        decoration: InputDecoration(
-                            prefixIcon: Container(
-                              width: 40,
-                              alignment: Alignment.center,
-                              child: const Icon(
-                                CupertinoIcons.padlock_solid,
-                                color: AppColors.black,
-                              ),
-                            ),
-                            border: InputBorder.none,
-                            hintText: 'Mật khẩu',
-                            hintStyle: const TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.primaryText,
-                            )),
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.black,
-                        ),
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        keyboardType: TextInputType.visiblePassword,
-                      ),
-                    ),
-                    Container(
-                      width: 200,
-                      height: 40,
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.only(bottom: 30, top: 20),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        color: Color(0xFF3C61EA),
-                      ),
-                      child: GestureDetector(
-                        onTap: _signIn,
-                        child: const Text(
-                          'Đăng nhập',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15,
-                              color: AppColors.white),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 200,
-                      height: 40,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
-                        color: AppColors.primary,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(SignUpScreen.route);
-                        },
-                        child: const Text(
-                          'Đăng ký',
-                          style: TextStyle(
+                              border: InputBorder.none,
+                              hintText: 'email',
+                              hintStyle: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryText,
+                              )),
+                          style: const TextStyle(
+                            fontSize: 17,
                             fontWeight: FontWeight.w400,
-                            fontSize: 15,
+                            color: AppColors.black,
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          autofillHints: const [AutofillHints.email],
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.black, width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          color: AppColors.white,
+                        ),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.fromLTRB(10, 5, 20, 5),
+                        child: TextFormField(
+                          controller: _passwordController,
+                          validator: _passwordInputValidator,
+                          decoration: InputDecoration(
+                              prefixIcon: Container(
+                                width: 40,
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  CupertinoIcons.padlock_solid,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Mật khẩu',
+                              hintStyle: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryText,
+                              )),
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.black,
+                          ),
+                          obscureText: true,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          keyboardType: TextInputType.visiblePassword,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: _signIn,
+                        child: Container(
+                          width: 200,
+                          height: 40,
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.only(bottom: 30, top: 20),
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
                             color: Color(0xFF3C61EA),
+                          ),
+                          child: const Text(
+                            'Đăng nhập',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                color: AppColors.white),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(SignUpScreen.route);
+                        },
+                        child: Container(
+                          width: 200,
+                          height: 40,
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            color: AppColors.primary,
+                          ),
+                          child:  const Text(
+                            'Đăng ký',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 15,
+                              color: Color(0xFF3C61EA),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
+      )
     );
   }
 }
