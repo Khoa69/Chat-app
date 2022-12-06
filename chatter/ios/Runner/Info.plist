@@ -67,5 +67,10 @@
 	<string>Cho phép BKZalo truy cập vào audio</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Cho phép BKZalo truy cập vào micro</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>sms</string>
+		<string>tel</string>
+	</array>
 </dict>
 </plist>
