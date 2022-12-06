@@ -1,10 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "/home/sang/Chat-app/chatter/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
-                    "source": "/home/sang/.gradle/caches/transforms-3/6ba587f18e0cfb42db299785e64a7064/transformed/browser-1.4.0/res/values-zh-rTW/values-zh-rTW.xml",
+                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/feadf51cdffd08d0049cb746009a9522/transformed/core-1.8.0/res/values-zh-rTW/values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "38",
+                        "startColumns": "4",
+                        "startOffsets": "3312",
+                        "endColumns": "100",
+                        "endOffsets": "3408"
+                    }
+                },
+                {
+                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/6ba587f18e0cfb42db299785e64a7064/transformed/browser-1.4.0/res/values-zh-rTW/values-zh-rTW.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -13,15 +30,32 @@
                         "endOffsets": "134,226,327,420"
                     },
                     "to": {
-                        "startLines": "20,21,22,23",
+                        "startLines": "20,31,32,33",
                         "startColumns": "4,4,4,4",
-                        "startOffsets": "1874,1958,2050,2151",
+                        "startOffsets": "1874,2614,2706,2807",
                         "endColumns": "83,91,100,92",
-                        "endOffsets": "1953,2045,2146,2239"
+                        "endOffsets": "1953,2701,2802,2895"
                     }
                 },
                 {
-                    "source": "/home/sang/.gradle/caches/transforms-3/c961ed94b4c08b113cd6707f193ad0e9/transformed/jetified-play-services-base-18.0.1/res/values-zh-rTW/values.xml",
+                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/eac5f99dc0513a1e4e90d333dbc4d3e5/transformed/jetified-media2-session-1.2.0/res/values-zh-rTW/values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,152,246,338,449",
+                        "endColumns": "96,93,91,110,114",
+                        "endOffsets": "147,241,333,444,559"
+                    },
+                    "to": {
+                        "startLines": "21,34,35,36,37",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "1958,2900,2994,3086,3197",
+                        "endColumns": "96,93,91,110,114",
+                        "endOffsets": "2050,2989,3081,3192,3307"
+                    }
+                },
+                {
+                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/c961ed94b4c08b113cd6707f193ad0e9/transformed/jetified-play-services-base-18.0.1/res/values-zh-rTW/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,7 +72,7 @@
                     }
                 },
                 {
-                    "source": "/home/sang/.gradle/caches/transforms-3/d1c32b1c74d9fbc2dad83513438f2124/transformed/jetified-play-services-basement-18.0.0/res/values-zh-rTW/values.xml",
+                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/d1c32b1c74d9fbc2dad83513438f2124/transformed/jetified-play-services-basement-18.0.0/res/values-zh-rTW/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,20 +89,20 @@
                     }
                 },
                 {
-                    "source": "/home/sang/.gradle/caches/transforms-3/d4be00ef9362846b7e5ef168486a55d7/transformed/core-1.6.0/res/values-zh-rTW/values-zh-rTW.xml",
+                    "source": "/Users/pscd_mac/.gradle/caches/transforms-3/a277c38eb06c9e3334867efe9822273c/transformed/jetified-exoplayer-core-2.18.1/res/values-zh-rTW/values-zh-rTW.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,111,167,224,277,347,401,477,555",
+                        "endColumns": "55,55,56,52,69,53,75,77,58",
+                        "endOffsets": "106,162,219,272,342,396,472,550,609"
                     },
                     "to": {
-                        "startLines": "24",
-                        "startColumns": "4",
-                        "startOffsets": "2244",
-                        "endColumns": "100",
-                        "endOffsets": "2340"
+                        "startLines": "22,23,24,25,26,27,28,29,30",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "2055,2111,2167,2224,2277,2347,2401,2477,2555",
+                        "endColumns": "55,55,56,52,69,53,75,77,58",
+                        "endOffsets": "2106,2162,2219,2272,2342,2396,2472,2550,2609"
                     }
                 }
             ]

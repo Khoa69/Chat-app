@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/Reachability.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		P+Rct4T2JvvqTKHkUY9RR1Yq6VQ=
+		R0vS/I4MjSxVmkqr22qcUkrTzYw=
 		</data>
 		<key>Modules/Reachability.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		uGMhtOAT0nOLkbN1ziMWVvPAaNU=
+		Ck0HIu48agoccsKx0OsxwPczNvY=
 		</data>
 		<key>Modules/Reachability.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -81,22 +81,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			P+Rct4T2JvvqTKHkUY9RR1Yq6VQ=
+			R0vS/I4MjSxVmkqr22qcUkrTzYw=
 			</data>
 			<key>hash2</key>
 			<data>
-			VX7l7g9n2yxeB+ViT9UnS2LkPRsZ0aec/LE0RhsAN3o=
+			aWyyalxRxNQrkl2nipJGxsp/2ku4YCuqxooj7d2/Mzs=
 			</data>
 		</dict>
 		<key>Modules/Reachability.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uGMhtOAT0nOLkbN1ziMWVvPAaNU=
+			Ck0HIu48agoccsKx0OsxwPczNvY=
 			</data>
 			<key>hash2</key>
 			<data>
-			af2kM+wyamFqFuZ4JzqC4YQ6Mjmh9cQmY0tLOp82nvM=
+			ezAEvL5VlUcFOfUCF6Rb05DoTK3yoCk4Q4H1r7fzSHI=
 			</data>
 		</dict>
 		<key>Modules/Reachability.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
