@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.sela.app"
+3    package="com.example.cora_app"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -21,15 +21,15 @@
 17    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 17-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:4:5-72
 17-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:4:22-70
-18    <uses-permission android:name="android.permission.CAMERA" />
-18-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:6:5-64
-18-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:6:22-62
-19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-19-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:7:5-81
-19-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:7:22-78
-20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+18    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+18-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:6:5-80
+18-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:6:22-77
+19    <uses-permission android:name="android.permission.CAMERA" />
+19-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:7:5-64
+19-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:7:22-62
+20    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 20-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:8:5-80
-20-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:8:22-77
+20-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:8:22-78
 21    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 21-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:9:5-80
 21-->/Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/android/app/src/main/AndroidManifest.xml:9:22-78
@@ -98,7 +98,7 @@
 54        android:usesCleartextTraffic="true" >
 54-->[:cloud_functions] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/cloud_functions/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-44
 55        <activity
-56            android:name="com.sela.app.MainActivity"
+56            android:name="com.example.cora_app.MainActivity"
 57            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 58            android:exported="true"
 59            android:hardwareAccelerated="true"
@@ -189,7 +189,7 @@
 118-->[:image_picker_android] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 119            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
 119-->[:image_picker_android] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
-120            android:authorities="com.sela.app.flutter.image_provider"
+120            android:authorities="com.example.cora_app.flutter.image_provider"
 120-->[:image_picker_android] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
 121            android:exported="false"
 121-->[:image_picker_android] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
@@ -216,7 +216,7 @@
 133-->[:share_plus] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 134            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
 134-->[:share_plus] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-77
-135            android:authorities="com.sela.app.flutter.share_provider"
+135            android:authorities="com.example.cora_app.flutter.share_provider"
 135-->[:share_plus] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
 136            android:exported="false"
 136-->[:share_plus] /Users/pscd_mac/Desktop/chatapp/Chat-app/chatter/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
@@ -312,7 +312,7 @@
 187-->[com.google.firebase:firebase-common:20.1.1] /Users/pscd_mac/.gradle/caches/transforms-3/361614e9ca911f20112e2fe2e741c358/transformed/jetified-firebase-common-20.1.1/AndroidManifest.xml:26:9-31:39
 188            android:name="com.google.firebase.provider.FirebaseInitProvider"
 188-->[com.google.firebase:firebase-common:20.1.1] /Users/pscd_mac/.gradle/caches/transforms-3/361614e9ca911f20112e2fe2e741c358/transformed/jetified-firebase-common-20.1.1/AndroidManifest.xml:27:13-77
-189            android:authorities="com.sela.app.firebaseinitprovider"
+189            android:authorities="com.example.cora_app.firebaseinitprovider"
 189-->[com.google.firebase:firebase-common:20.1.1] /Users/pscd_mac/.gradle/caches/transforms-3/361614e9ca911f20112e2fe2e741c358/transformed/jetified-firebase-common-20.1.1/AndroidManifest.xml:28:13-72
 190            android:directBootAware="true"
 190-->[com.google.firebase:firebase-common:20.1.1] /Users/pscd_mac/.gradle/caches/transforms-3/361614e9ca911f20112e2fe2e741c358/transformed/jetified-firebase-common-20.1.1/AndroidManifest.xml:29:13-43

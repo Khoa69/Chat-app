@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sela.app"
+    package="com.example.cora_app"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -15,9 +15,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
@@ -53,7 +53,7 @@
         android:label="BKZalo"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.sela.app.MainActivity"
+            android:name="com.example.cora_app.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -117,7 +117,7 @@
 
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.sela.app.flutter.image_provider"
+            android:authorities="com.example.cora_app.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -132,7 +132,7 @@
 
         <provider
             android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-            android:authorities="com.sela.app.flutter.share_provider"
+            android:authorities="com.example.cora_app.flutter.share_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -186,7 +186,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.sela.app.firebaseinitprovider"
+            android:authorities="com.example.cora_app.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
